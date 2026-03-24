@@ -1,0 +1,695 @@
+!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Elena Voss | Creative Portfolio</title>
+  <!-- Google Fonts & simple reset -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fbfbfd;
+      color: #1a1a2c;
+      line-height: 1.4;
+      scroll-behavior: smooth;
+    }
+
+    /* container utility */
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* typography */
+    h1, h2, h3 {
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      line-height: 1.1;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 2.8rem);
+      margin-bottom: 1.5rem;
+      position: relative;
+      display: inline-block;
+    }
+
+    h2:after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 60px;
+      height: 4px;
+      background: #6366f1;
+      border-radius: 4px;
+    }
+
+    .section {
+      padding: 80px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .section:last-child {
+      border-bottom: none;
+    }
+
+    /* navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      background: rgba(251, 251, 253, 0.92);
+      backdrop-filter: blur(12px);
+      z-index: 100;
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(0,0,0,0.05);
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #3b3b9e, #6366f1);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #1f1f2e;
+      transition: 0.2s;
+      font-size: 1rem;
+    }
+
+    .nav-links a:hover {
+      color: #6366f1;
+    }
+
+    /* buttons */
+    .btn {
+      display: inline-block;
+      background: #1f1f2e;
+      color: white;
+      padding: 12px 28px;
+      border-radius: 40px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      border: none;
+      cursor: pointer;
+      font-size: 0.95rem;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1.5px solid #1f1f2e;
+      color: #1f1f2e;
+    }
+
+    .btn-outline:hover {
+      background: #1f1f2e;
+      color: white;
+    }
+
+    .btn-primary {
+      background: #6366f1;
+      box-shadow: 0 6px 14px rgba(99, 102, 241, 0.25);
+    }
+
+    .btn-primary:hover {
+      background: #4f52e0;
+      transform: translateY(-3px);
+    }
+
+    /* hero */
+    .hero {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      padding: 40px 0 20px;
+    }
+
+    .hero-content {
+      flex: 1.2;
+    }
+
+    .hero-badge {
+      background: #e9eaff;
+      color: #4f46e5;
+      padding: 6px 14px;
+      border-radius: 40px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 24px;
+    }
+
+    .hero-content p {
+      font-size: 1.2rem;
+      margin: 24px 0 32px;
+      color: #4a4a5e;
+      max-width: 520px;
+    }
+
+    .hero-image {
+      flex: 0.8;
+      display: flex;
+      justify-content: center;
+    }
+
+    .avatar {
+      width: 280px;
+      height: 280px;
+      background: linear-gradient(145deg, #e0e7ff, #f3f4ff);
+      border-radius: 38% 62% 70% 30% / 40% 45% 55% 60%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 25px 35px -12px rgba(0,0,0,0.1);
+    }
+
+    .avatar span {
+      font-size: 5rem;
+      font-weight: 400;
+    }
+
+    /* project grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 28px;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.2, 0, 0, 1);
+      box-shadow: 0 12px 24px -12px rgba(0,0,0,0.08);
+      border: 1px solid #f0f0f2;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 28px 34px -18px rgba(0,0,0,0.12);
+    }
+
+    .project-img {
+      height: 200px;
+      background: #eef2ff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      font-weight: 500;
+      color: #4f46e5;
+    }
+
+    .project-info {
+      padding: 24px 20px 28px;
+    }
+
+    .project-info h3 {
+      font-size: 1.5rem;
+      margin-bottom: 10px;
+    }
+
+    .project-info p {
+      color: #5a5a70;
+      margin-bottom: 18px;
+      line-height: 1.4;
+    }
+
+    .tech-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 20px;
+    }
+
+    .tech-tags span {
+      background: #f2f2f6;
+      padding: 4px 12px;
+      border-radius: 40px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      color: #2d2d44;
+    }
+
+    .project-link {
+      font-weight: 600;
+      text-decoration: none;
+      color: #6366f1;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    /* skills & tools */
+    .skills-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .skill-category {
+      flex: 1;
+      min-width: 200px;
+      background: white;
+      padding: 1.8rem;
+      border-radius: 28px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+      border: 1px solid #efeff1;
+    }
+
+    .skill-category h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+    }
+
+    .skill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 12px;
+    }
+
+    .skill-list li {
+      background: #f5f5fa;
+      padding: 6px 16px;
+      border-radius: 40px;
+      list-style: none;
+      font-weight: 500;
+      font-size: 0.85rem;
+    }
+
+    /* contact & form */
+    .contact-flex {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 48px;
+      margin-top: 24px;
+    }
+
+    .contact-info {
+      flex: 1;
+    }
+
+    .contact-form {
+      flex: 1;
+      background: white;
+      padding: 32px;
+      border-radius: 32px;
+      box-shadow: 0 12px 28px -12px rgba(0,0,0,0.06);
+      border: 1px solid #efeff3;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 14px 18px;
+      border: 1px solid #e2e2e8;
+      border-radius: 28px;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+      transition: 0.2s;
+      background: #fefefe;
+    }
+
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #6366f1;
+      box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 24px;
+      margin-top: 32px;
+    }
+
+    .social-icon {
+      font-size: 1.8rem;
+      text-decoration: none;
+      background: #f0f0f4;
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.2s;
+      color: #1f1f2e;
+      font-weight: 600;
+    }
+
+    .social-icon:hover {
+      background: #6366f1;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 32px 0;
+      font-size: 0.85rem;
+      color: #6c6c80;
+      border-top: 1px solid rgba(0,0,0,0.05);
+    }
+
+    /* message toast */
+    .toast-msg {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1f2a3e;
+      color: white;
+      padding: 12px 24px;
+      border-radius: 60px;
+      font-size: 0.85rem;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      z-index: 200;
+      backdrop-filter: blur(8px);
+      background: rgba(31,31,46,0.9);
+    }
+
+    @media (max-width: 780px) {
+      .container {
+        padding: 0 24px;
+      }
+      .nav-inner {
+        flex-direction: column;
+      }
+      .hero {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+      .hero-content p {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      h2:after {
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      h2 {
+        text-align: center;
+        display: block;
+      }
+      .contact-flex {
+        flex-direction: column;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <div class="container nav-inner">
+    <div class="logo">E.V.</div>
+    <ul class="nav-links">
+      <li><a href="#work">Work</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</nav>
+
+<main>
+  <!-- Hero section -->
+  <div class="container">
+    <div class="hero">
+      <div class="hero-content">
+        <span class="hero-badge">✦ digital craftsperson</span>
+        <h1>Crafting bold <br> digital experiences.</h1>
+        <p>Hi, I'm Elena Voss — UI/UX engineer & creative developer. I design and build interfaces that balance beauty, usability, and performance.</p>
+        <div>
+          <a href="#work" class="btn btn-primary" style="margin-right: 16px;">View projects →</a>
+          <a href="#contact" class="btn btn-outline">Let's talk</a>
+        </div>
+      </div>
+      <div class="hero-image">
+        <div class="avatar">
+          <span>✨</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Work / Portfolio section -->
+  <div class="section" id="work">
+    <div class="container">
+      <h2>Selected projects</h2>
+      <div class="projects-grid">
+        <!-- Project 1 -->
+        <div class="project-card">
+          <div class="project-img">🌊</div>
+          <div class="project-info">
+            <h3>NovaWave</h3>
+            <p>Immersive audio platform with real-time collaborative playlists and spatial UI.</p>
+            <div class="tech-tags">
+              <span>React</span><span>Framer Motion</span><span>Web Audio</span>
+            </div>
+            <a href="#" class="project-link" id="demoLink1">Live demo →</a>
+          </div>
+        </div>
+        <!-- Project 2 -->
+        <div class="project-card">
+          <div class="project-img">📊</div>
+          <div class="project-info">
+            <h3>Atlas Analytics</h3>
+            <p>Dashboard for climate data insights with interactive maps and smart visualizations.</p>
+            <div class="tech-tags">
+              <span>D3.js</span><span>Vue</span><span>Mapbox</span>
+            </div>
+            <a href="#" class="project-link" id="demoLink2">Case study →</a>
+          </div>
+        </div>
+        <!-- Project 3 -->
+        <div class="project-card">
+          <div class="project-img">🛍️</div>
+          <div class="project-info">
+            <h3>Artifact Studio</h3>
+            <p>Minimalist e‑commerce concept for handmade ceramics with 3D product viewer.</p>
+            <div class="tech-tags">
+              <span>Three.js</span><span>Tailwind</span><span>GSAP</span>
+            </div>
+            <a href="#" class="project-link" id="demoLink3">Explore →</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Skills / expertise -->
+  <div class="section" id="skills">
+    <div class="container">
+      <h2>Tech stack & tools</h2>
+      <div class="skills-wrapper">
+        <div class="skill-category">
+          <h3>Frontend</h3>
+          <ul class="skill-list">
+            <li>React</li><li>Vue</li><li>TypeScript</li><li>Tailwind</li><li>Framer Motion</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Backend & tools</h3>
+          <ul class="skill-list">
+            <li>Node.js</li><li>Python</li><li>Figma</li><li>Git/Github</li><li>Vite</li>
+          </ul>
+        </div>
+        <div class="skill-category">
+          <h3>Design & creative</h3>
+          <ul class="skill-list">
+            <li>UI/UX</li><li>Motion Design</li><li>Prototyping</li><li>Accessibility</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Contact & form -->
+  <div class="section" id="contact">
+    <div class="container">
+      <h2>Let’s connect</h2>
+      <div class="contact-flex">
+        <div class="contact-info">
+          <p style="font-size: 1.2rem; margin-bottom: 24px;">Got a project, collaboration, or just want to say hi? I'm open to freelance work and creative opportunities.</p>
+          <div style="margin: 20px 0;">
+            <p style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">📧 <strong>elena.voss@portfolio.dev</strong></p>
+            <p style="display: flex; align-items: center; gap: 12px;">📍 based in Berlin · remote worldwide</p>
+          </div>
+          <div class="social-links">
+            <a href="#" class="social-icon" aria-label="GitHub" id="ghLink">GH</a>
+            <a href="#" class="social-icon" aria-label="LinkedIn" id="liLink">IN</a>
+            <a href="#" class="social-icon" aria-label="Twitter" id="twLink">🐦</a>
+          </div>
+        </div>
+        <div class="contact-form">
+          <h3 style="margin-bottom: 20px; font-size: 1.5rem;">Send a message</h3>
+          <form id="contactForm">
+            <div class="input-group">
+              <input type="text" id="nameInput" placeholder="Your name" required>
+            </div>
+            <div class="input-group">
+              <input type="email" id="emailInput" placeholder="Email address" required>
+            </div>
+            <div class="input-group">
+              <textarea id="msgInput" placeholder="Tell me about your idea..."></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Send message →</button>
+          </form>
+          <p style="font-size: 0.75rem; margin-top: 16px; text-align: center; color:#7e7e92;">* demo form — shows a friendly toast preview</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="container">
+    <p>© 2025 Elena Voss — Designed with curiosity & code.</p>
+  </div>
+</footer>
+
+<div id="toastMessage" class="toast-msg">✨ Message preview (demo mode)</div>
+
+<script>
+  // smooth navigation for anchor links
+  document.querySelectorAll('.nav-links a, .btn-primary[href="#work"], .btn-outline[href="#contact"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if(targetId && targetId.startsWith('#')) {
+        e.preventDefault();
+        const targetEl = document.querySelector(targetId);
+        if(targetEl) {
+          targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }
+    });
+  });
+
+  // additional demo interactions for project links (fake preview)
+  const demoLinks = document.querySelectorAll('#demoLink1, #demoLink2, #demoLink3');
+  const showToast = (msg) => {
+    const toast = document.getElementById('toastMessage');
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => {
+        if(toast.textContent === msg) toast.textContent = '✨ Message preview (demo mode)';
+      }, 300);
+    }, 2000);
+  };
+
+  demoLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      let projectName = '';
+      if(link.id === 'demoLink1') projectName = 'NovaWave';
+      if(link.id === 'demoLink2') projectName = 'Atlas Analytics';
+      if(link.id === 'demoLink3') projectName = 'Artifact Studio';
+      showToast(`🔍 Demo preview: "${projectName}" — full case study available upon request.`);
+    });
+  });
+
+  // social links demo behavior
+  const gh = document.getElementById('ghLink');
+  const li = document.getElementById('liLink');
+  const tw = document.getElementById('twLink');
+  
+  const socialHandler = (platform) => (e) => {
+    e.preventDefault();
+    showToast(`🌐 ${platform} profile demo — connect with me directly for real links!`);
+  };
+  
+  gh.addEventListener('click', socialHandler('GitHub'));
+  li.addEventListener('click', socialHandler('LinkedIn'));
+  tw.addEventListener('click', socialHandler('Twitter'));
+
+  // contact form handling: show nice toast with form values (demo)
+  const contactForm = document.getElementById('contactForm');
+  contactForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const name = document.getElementById('nameInput').value.trim();
+    const email = document.getElementById('emailInput').value.trim();
+    const message = document.getElementById('msgInput').value.trim();
+    
+    if(!name || !email) {
+      showToast('❌ Please enter at least name and email (demo friendly)');
+      return;
+    }
+    
+    // simple email regex check
+    const emailPattern = /^[^\s@]+@([^\s@]+\.)+[^\s@]+$/;
+    if(!emailPattern.test(email)) {
+      showToast('📧 Please use a valid email format (demo validation)');
+      return;
+    }
+    
+    const summary = message ? `"${message.substring(0, 45)}${message.length>45 ? '...' : ''}"` : 'no message';
+    showToast(`✨ Thanks ${name}! (demo) I'll reach you at ${email}. Message: ${summary}`);
+    // optionally reset fields (optional)
+    // contactForm.reset(); // uncomment if you want to reset, but not mandatory for demo
+    document.getElementById('nameInput').value = '';
+    document.getElementById('emailInput').value = '';
+    document.getElementById('msgInput').value = '';
+  });
+
+  // add ripple hover for buttons, tiny micro interaction
+  const btns = document.querySelectorAll('.btn');
+  btns.forEach(btn => {
+    btn.addEventListener('mouseenter', (e) => {
+      btn.style.transition = 'all 0.2s';
+    });
+  });
+  
+  // extra: style toast and ensure no accidental full reload
+  console.log('Portfolio ready — creative corner');
+</script>
+</body>
+</html>
